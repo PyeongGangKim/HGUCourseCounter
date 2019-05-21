@@ -30,8 +30,8 @@ public class Utils {
 	public static void writeAFile(ArrayList<String> lines, String targetFileName) {
 		
 		int num=targetFileName.lastIndexOf(File.separator);
-		System.out.println(num);
-		String filePath=targetFileName.substring(num);
+		String filePath=targetFileName.substring(0,num);
+		System.out.println(filePath);
 		File path = new File(filePath);
 		File resultFile = new File(targetFileName); 
 		if (!path.exists()) {
@@ -45,8 +45,10 @@ public class Utils {
 			System.exit(0);
 		}
 		outputStream.println("StudentID, TotalNumberOfSemestersRegistered, Semester, NumCoursesTakenInTheSemester");
+		outputStream.flush();
 		for(String line:lines) {
 			outputStream.println(line);
+			outputStream.flush();
 		}
 	}
 
