@@ -102,7 +102,7 @@ public class HGUCoursePatternAnalyzer {
 			   String key = iteratorKey.next();
 			   int size=sortedStudents.get(key).getSemestersByYearAndSemester().size();
 			   for(int i=1;i<size+1;i++) {
-				   String lines=key+" ,"+size+" ,"+i+" ,"+sortedStudents.get(key).getNumCourseInNthSementer(i);
+				   String lines=key+","+size+","+i+","+sortedStudents.get(key).getNumCourseInNthSementer(i);
 				   resultLines.add(lines);
 			   }
 		}		   
