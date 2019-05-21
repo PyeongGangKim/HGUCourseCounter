@@ -31,7 +31,6 @@ public class Utils {
 		
 		int num=targetFileName.lastIndexOf(File.separator);
 		String filePath=targetFileName.substring(0,num);
-		System.out.println(filePath);
 		File path = new File(filePath);
 		File resultFile = new File(targetFileName); 
 		if (!path.exists()) {
