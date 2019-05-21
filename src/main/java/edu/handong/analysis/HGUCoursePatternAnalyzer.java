@@ -1,14 +1,16 @@
 package edu.handong.analysis;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
 import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
-import edu.handong.analysise.utils.NotEnoughArgumentException;
-import edu.handong.analysise.utils.Utils;
+import edu.handong.analysis.utils.NotEnoughArgumentException;
+import edu.handong.analysis.utils.Utils;
 
 public class HGUCoursePatternAnalyzer {
 
@@ -53,10 +55,31 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private HashMap<String,Student> loadStudentCourseRecords(ArrayList<String> lines) {
-		
-		// TODO: Implement this method
-		
-		return null; // do not forget to return a proper variable.
+		HashMap<String,Student> studentData= new HashMap<String,Student>();
+		ArrayList<Course> courseData= new ArrayList<Course>();
+		ArrayList<Course> sameStudentId = new ArrayList<Course>(); 
+		for(String data:lines) {
+			int i=0;
+			Course course = new Course(data);
+			for(Course courses: sameStudentId) {
+				if((courses.getStudentId().equals(course.getStudentId()))) {
+					i++;
+				}
+			}
+			if(i==0){
+				sameStudentId.add(course);
+			}
+			courseData.add(course);
+		}
+		for(Course course: sameStudentId) {
+			Student student = new Student(course.getStudentId());
+		for(Course data: courseData) {
+			student.addCourse(data);
+		}
+		studentData.put(student.getStudentId(),student);
+		}
+		return studentData;
+
 	}
 
 	/**
@@ -73,9 +96,18 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private ArrayList<String> countNumberOfCoursesTakenInEachSemester(Map<String, Student> sortedStudents) {
+		ArrayList<String> resultLines= new ArrayList<String>();
+		Iterator<String> iteratorKey = ((TreeMap<String, Student>) sortedStudents).keySet().iterator();
+		while(iteratorKey.hasNext()){
+			   String key = iteratorKey.next();
+			   int size=sortedStudents.get(key).getSemestersByYearAndSemester().size();
+			   for(int i=1;i<size+1;i++) {
+				   String lines=key+" ,"+size+" ,"+i+" ,"+sortedStudents.get(key).getNumCourseInNthSementer(i);
+				   resultLines.add(lines);
+			   }
+		}		   
 		
-		// TODO: Implement this method
-		
-		return null; // do not forget to return a proper variable.
+		Collections.sort(resultLines);
+		return resultLines; // do not forget to return a proper variable.
 	}
 }
