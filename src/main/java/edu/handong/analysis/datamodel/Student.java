@@ -6,10 +6,22 @@ public class Student {
 	private String studentId;
 	private ArrayList<Course> coursesTaken; 
 	private HashMap<String,Integer> semestersByYearAndSemester; 
+	private String yearAndSemester;
+	
+	public String getYearAndSemester() {
+		return yearAndSemester;
+	}
+
 	public Student(String studentId) {
 	this.studentId=studentId;
 	coursesTaken=new ArrayList<Course>(); 
 	} // constructor
+	
+	public ArrayList<Course> getCoursesTaken() {
+		return coursesTaken;
+	}
+
+	
 	public void addCourse(Course newRecord) {
 		if(studentId.equals(newRecord.getStudentId())) {
 		coursesTaken.add(newRecord);
@@ -46,7 +58,8 @@ public class Student {
 		for(Course data:coursesTaken) {
 			String sem=data.getYearTaken()+"-"+data.getSemesterCourseTaken();
 		if(semesters.get(sem)==semester) {
-			count++;		
+			count++;
+			yearAndSemester=sem.split("-")[0];
 		}
 	}
 		return count;
@@ -57,6 +70,12 @@ public class Student {
 	}
 	public void setStudentId(String studentId) {
 		this.studentId = studentId;
+	}
+	public Iterator<String> giveKey(){
+		Collection<String> collection =getSemestersByYearAndSemester().keySet();
+		Iterator<String> iter=collection.iterator();
+		return iter;
+		
 	}
 }
 	

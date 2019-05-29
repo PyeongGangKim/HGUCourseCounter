@@ -7,21 +7,25 @@ public class Course {
 	private String secondMajor;
 	private String courseCode;
 	private String courseName;
+	public String getCourseName() {
+		return courseName;
+	}
+
 	private String courseCredit;
 	private int yearTaken;
 	private int semesterCourseTaken;
 	
-	public Course(String line) {
-		String[] converter=line.split(",");
-		studentId=converter[0].trim();
-		yearMonthGraduated=converter[1].trim();
-		firstMajor=converter[2].trim();
-		secondMajor=converter[3].trim();
-		courseCode=converter[4].trim();
-		courseName=converter[5].trim();
-		courseCredit=converter[6].trim();
-		yearTaken=Integer.parseInt(converter[7].trim());
-		semesterCourseTaken=Integer.parseInt(converter[8].trim());
+	public Course(String[] line) {
+		studentId=line[0].trim();
+		yearMonthGraduated=line[1].trim();
+		firstMajor=line[2].trim();
+		secondMajor=line[3].trim();
+		courseCode=line[4].trim();
+		courseName=line[5].trim();
+		courseCredit=line[6].trim();
+		yearTaken=Integer.parseInt(line[7].trim());
+		semesterCourseTaken=Integer.parseInt(line[8].trim());
+		
 		
 	}
 	public int getYearTaken() {
@@ -46,6 +50,10 @@ public class Course {
 	
 	public void setStudentId(String studentId) {
 		this.studentId = studentId;
+	}
+	
+	public String getCourseCode() {
+		return courseCode;
 	}
 
 }
